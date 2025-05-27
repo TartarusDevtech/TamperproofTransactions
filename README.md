@@ -1,5 +1,11 @@
-# tamperproof-transactions
-Implementation of EIP-7754
+# Tamperproof Transactions
+
+**About:**  
+Implementation of EIP-7754 for tamperproof cryptographic transaction signing and verification.
+
+## Overview
+
+Tamperproof Transactions provides cryptographic signing and verification utilities compliant with [EIP-7754](https://eips.ethereum.org/EIPS/eip-7754), allowing you to sign transaction data and verify signatures using keys fetched from DNS records, JSON endpoints, or provided directly.
 
 ## Installation
 
@@ -27,8 +33,6 @@ export enum SigningAlgorithm {
 
 Signs a string using the provided private key and algorithm.
 
-#### Example
-
 ```ts
 import { sign, SigningAlgorithm } from '@uniswap/tamperproof-transactions';
 import { generateKeyPairSync } from 'crypto';
@@ -43,8 +47,6 @@ const signature = sign(data, privateKey, SigningAlgorithm.RSA);
 ### `verifySync(calldata: string, signature: string, algorithm: SigningAlgorithm, publicKey: KeyObject): boolean`
 
 Verifies a signature synchronously.
-
-#### Example
 
 ```ts
 import { sign, verifySync, SigningAlgorithm } from '@uniswap/tamperproof-transactions';
@@ -63,8 +65,6 @@ const isValid = verifySync(data, signature, SigningAlgorithm.RSA, publicKey);
 
 Verifies a signature by fetching a public key from a DNS TXT record.
 
-#### Example
-
 ```ts
 import { verifyAsyncDns } from '@uniswap/tamperproof-transactions';
 
@@ -76,8 +76,6 @@ const isValid = await verifyAsyncDns('data', 'signature', 'example.com');
 ### `verifyAsyncJson(calldata: string, signature: string, url: string, id?: number): Promise<boolean>`
 
 Verifies a signature by fetching a public key from a JSON endpoint.
-
-#### Example
 
 ```ts
 import { verifyAsyncJson } from '@uniswap/tamperproof-transactions';
@@ -100,8 +98,6 @@ type PublicKey = {
 };
 ```
 
-#### Example
-
 ```ts
 import { generate, SigningAlgorithm } from '@uniswap/tamperproof-transactions';
 
@@ -118,4 +114,3 @@ const json = generate(publicKey);
 ## License
 
 MIT
-
